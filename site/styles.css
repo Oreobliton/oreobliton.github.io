@@ -1,74 +1,50 @@
-/* Style général */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-/* En-tête */
-.header {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 20px;
-}
-
-/* Conteneur principal avec flexbox */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    gap: 20px;
-}
-
-/* Colonne de gauche et droite */
-.sidebar-left, .sidebar-right {
-    flex: 1;
-    padding: 15px;
-    background-color: #eee;
-    min-width: 150px;
-}
-
-/* Colonne centrale (menu principal) */
-.main-content {
-    flex: 2;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Menu principal */
-.main-menu ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.main-menu li {
-    display: inline;
-}
-
-.main-menu a {
-    text-decoration: none;
-    color: #4CAF50;
-    font-weight: bold;
-    padding: 5px 10px;
-}
-
-.main-menu a:hover {
-    background-color: #4CAF50;
-    color: #fff;
-    border-radius: 5px;
-}
-
-/* Pied de page */
-.footer {
-    background-color: #4CAF50;
-    color: #fff;
+.box {
+    border-radius: 8px;
     padding: 10px;
-    margin-top: 20px;
+    overflow: auto;
+  }
+
+.grid-container {
+    display: grid;
+    position: relative;
+    margin: auto;
+    max-width: 1100px;
+    grid-template-areas:
+        "header header header"
+        "todo bio nav"
+        "todo bio nav"
+        "todo timer changelog"
+        "blinkee-1 blinkee-1 credits"
+        "blinkee-2 blinkee-2 credits"
+        "blinkee-3 blinkee-3 credits"
+        "footer footer footer";
+    grid-template-columns: 20% 50% 30%;
+    grid-template-rows: 50px 200px 80px 190px 30px 30px 30px 80px;
+    gap: 20px;
+    padding: 20px 75px 20px 20px;
 }
+.header { grid-area: header; background-color: lightseagreen; }
+#bio { grid-area: bio; background-color: lightblue; }
+#nav { grid-area: nav; background-color: lightcoral; }
+#todo { grid-area: todo; background-color: lightgreen; }
+#timer { 
+    grid-area: timer; 
+    background-color: lightpink;
+    width: 100%;
+}
+#changelog { 
+    grid-area: changelog;
+    background-color: lightgray;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#blinkee-1 { grid-area: blinkee-1; background-color: lightsalmon; margin-right: 40px;}
+#blinkee-2 { grid-area: blinkee-2; gap: 10px; background-color: lightsalmon; margin-right: 40px;}
+#blinkee-3 { grid-area: blinkee-3; background-color: lightsalmon; margin-right: 40px;}
+#credits {
+    grid-area: credits; 
+    background-color: lightcyan; 
+    margin-left: -40px;
+}
+#footer { grid-area: footer; background-color: lightsteelblue; }
