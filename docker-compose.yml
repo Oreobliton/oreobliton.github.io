@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"  # Expose le port 8080 en local vers le port 80 de Nginx
+    volumes:
+      - ./site:/usr/share/nginx/html:ro  # Monte le dossier site/ vers le dossier Nginx avec accès en lecture seule
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro  # Monte la configuration Nginx personnalisée

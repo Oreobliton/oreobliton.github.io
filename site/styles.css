@@ -1,0 +1,74 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* En-tête */
+.header {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Conteneur principal avec flexbox */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Colonne de gauche et droite */
+.sidebar-left, .sidebar-right {
+    flex: 1;
+    padding: 15px;
+    background-color: #eee;
+    min-width: 150px;
+}
+
+/* Colonne centrale (menu principal) */
+.main-content {
+    flex: 2;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu principal */
+.main-menu ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.main-menu li {
+    display: inline;
+}
+
+.main-menu a {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.main-menu a:hover {
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/* Pied de page */
+.footer {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    margin-top: 20px;
+}
