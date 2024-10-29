@@ -1,8 +1,16 @@
+body {
+    background-image: url('images/main-background.jpg'); /* Path to your background image */
+    background-size: cover;         /* Ensures the image covers the entire viewport */
+    background-position: center;    /* Centers the image */
+    background-repeat: no-repeat;   /* Prevents tiling */
+    background-attachment: fixed;   /* Keeps the background fixed when scrolling */
+}
+
 .box {
     border-radius: 8px;
     padding: 10px;
     overflow: auto;
-  }
+}
 
 .grid-container {
     display: grid;
@@ -21,6 +29,7 @@
     gap: 20px;
     padding: 20px 75px 20px 20px;
 }
+
 
 .header { 
     grid-area: header;
@@ -82,4 +91,16 @@ nav a {
 #footer { 
     grid-area: footer; 
     background-color: lightsteelblue; 
+}
+
+.container {
+    background-image: url('images/container-background.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image within the div */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    
+    /* Existing styles */
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
 }
