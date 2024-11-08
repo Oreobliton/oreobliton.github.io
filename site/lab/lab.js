@@ -23,21 +23,16 @@ const quotes = [
 
 
 function generateQuote() {
-    // Sélectionne une citation aléatoire
     const randomIndex = Math.floor(Math.random() * quotes.length);
-    
     const selectedQuote = quotes[randomIndex];
-
-    // Sélectionne l'élément contenant la citation (assure-toi que tu as un élément .quote dans ton HTML)
     const quoteElement = document.querySelector('.quote');
     quoteElement.innerHTML = ''; // Vide le contenu précédent de l'élément
 
 
     selectedQuote.text.split('').forEach(char => {
-        const span = document.createElement('span'); // Crée un nouvel élément <span>
-        // Vérifie si le caractère est un espace
+        const span = document.createElement('span');
         if (char === ' ') {
-            span.textContent = ' '; // Ajoute un espace explicite dans le span
+            span.textContent = ' ';
         } else {
             span.classList.add('letter'); // Ajoute la classe "letter" pour les lettres
             span.textContent = char; // Définit le texte du span comme étant le caractère actuel
@@ -54,7 +49,10 @@ function generateQuote() {
         quoteElement.appendChild(span); // Ajoute le <span> au conteneur principal (.quote)
     });
 
-    // Assure-toi que les citations sont stockées sous un format correct avec l'auteur
-    // Par exemple, chaque objet dans `quotes` doit être un objet avec `text` et `author` comme propriétés
     document.querySelector('.author').textContent = `- ${selectedQuote.author}`;
+}
+
+function stopQuote() {
+    document.querySelector('.quote').textContent = "";
+    document.querySelector('.author').textContent = "";
 }

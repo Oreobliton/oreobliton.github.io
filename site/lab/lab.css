@@ -17,12 +17,11 @@
 
 .quote {
     font-family: 'Arial', sans-serif;   /* Change la police du texte */
-    font-size: 20px;                    /* Définit la taille du texte */
+    font-size: 40px;                    /* Définit la taille du texte */
     color: #333333;                     /* Change la couleur du texte */
     text-align: center;                 /* Centre le texte */
     line-height: 1.5;                   /* Définit l'espacement entre les lignes */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Ajoute une ombre au texte */
-    padding: 10px;   
 }
 
 .letter {
