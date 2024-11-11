@@ -56,3 +56,40 @@ function stopQuote() {
     document.querySelector('.quote').textContent = "";
     document.querySelector('.author').textContent = "";
 }
+
+
+// ------------------ Colored Text ------------------ //
+function shineText() {
+    const textElement = document.querySelector('.colored-text');
+    var textParts = textElement.textContent.split(" ");
+    console.log(textElement);
+    textElement.innerHTML = ""
+
+    textParts.forEach(word => {
+        const span = document.createElement('span');
+        span.classList.toggle('shine');
+        span.textContent = word; // Définit le texte du span comme étant le caractère actuel
+
+        // Ajoute un écouteur d'événements pour redémarrer l'animation et appliquer de nouvelles valeurs à chaque itération
+        span.addEventListener('animationiteration', () => {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            span.style.setProperty('--r', r);
+            span.style.setProperty('--g', g);
+            span.style.setProperty('--b', b);
+        });
+        textElement.appendChild(span); // Ajoute le <span> au conteneur principal (.quote)
+        textElement.appendChild(document.createTextNode(' '));        
+    });
+}
+
+// ------------------ Rotate Picture ------------------ //
+function rotatePicture() {
+    document.querySelector(".turning-image").classList.toggle("animate")
+}
+
+// ------------------ Rotate Picture ------------------ //
+function rotatePicture() {
+    document.querySelector(".turning-image").classList.toggle("animate")
+}

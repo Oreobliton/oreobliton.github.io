@@ -37,3 +37,75 @@
         transform: translate(var(--shake-x), var(--shake-y));
     }
 }
+
+
+
+.colored-text-container {
+    display: flex; /* Utilisation de flexbox pour aligner correctement les éléments */
+    flex-direction: column; /* Les éléments à l'intérieur s'empilent verticalement */
+    align-items: center; /* Aligne les éléments au centre */
+    justify-content: center; /* Centre les éléments horizontalement et verticalement */
+    width: 100%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* S'assure que le padding/margin n'affecte pas la taille de la div */
+    background-color:aquamarine;
+}
+
+
+.shine {
+    background-color: whitesmoke;
+    display: inline-block;
+    font-weight:bolder;
+    animation: coloring 2s infinite;
+}
+
+
+@keyframes coloring {
+    0% {
+        color: rgb(var(--r), var(--g), var(--b));
+    }
+    50% {
+        color: rgb(0, var(--g), 125);
+    }
+    100% {
+        color: rgb(var(--r), var(--g), var(--b));
+    }
+}
+
+
+
+.turning-image-container {
+    perspective: 1500px; 
+    background-color:blueviolet;
+    align-items: center;
+    box-sizing: border-box; /* S'assure que le padding/margin n'affecte pas la taille de la div */
+    flex-direction: column; /* Les éléments à l'intérieur s'empilent verticalement */
+    align-items: center;
+    display: flex;
+}
+
+.turning-image {
+    width: 300px; /* Adjust to your image size */
+    transform-origin: center;
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d; /* Enables 3D transformations */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: #333333 33px;
+}
+
+.turning-image.animate {
+    animation: turn 4s infinite;
+}
+
+@keyframes turn {
+    0% {
+        transform: rotateX(0deg) scaleY(1);
+    }
+    50% {
+        transform: rotateX(180deg) scaleY(1);
+    }
+    100% {
+        transform: rotateX(0deg) scaleY(1);
+    }
+}
