@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation de Texte</title>
+    <title>Cooking in the Lab</title>
     <link rel="icon" type="image/gif" href="../images/lab-icon.gif">
     <link rel="stylesheet" href="lab.css">
 </head>
@@ -14,15 +14,35 @@
         <button onclick="generateQuote()" class="quote-button">Nouvelle Citation</button>
         <button onclick="stopQuote()" class="quote-button">Fin de la citation</button>
     </div>
+    
     <div class="colored-text-container">
         <p class="colored-text">Shine bright like a diamond</p>
         <button onclick="shineText()" class="quote-button">Make it shine</button>
-        <button onclick="stopQuote()" class="quote-button">Stop the shine</button>
     </div>
+    
     <div class="turning-image-container">
         <img src="../images/crane-chauve.jpg" alt="Turning Image" class="turning-image">
         <button onclick="rotatePicture()" class="turn-button">Make it turn</button>
     </div>
+
+    <div class="number-guess-container">
+        <div class="form-container">
+            <form id="numberForm">
+                <h2>Guess me :-)</h2>
+                <label>Your numb:</label>
+                <input type="text" id="guess-number-input" required>
+                <button id="number-guess-button">Give it to me</button>
+            </form>
+        </div>
+        <div id="guessDisplay"></div>
+    </div>
+
+    <div class="first-canvas-container">
+        <h2> Nooo the freaky bald chaser again !!!!</h2>
+        <canvas id="first-canvas" width="1280" height="720"></canvas>
+    </div>
+
+    
     <script src="lab.js"></script>
 </body>
 </html>

@@ -84,12 +84,91 @@ function shineText() {
     });
 }
 
+
 // ------------------ Rotate Picture ------------------ //
 function rotatePicture() {
     document.querySelector(".turning-image").classList.toggle("animate")
 }
 
-// ------------------ Rotate Picture ------------------ //
-function rotatePicture() {
-    document.querySelector(".turning-image").classList.toggle("animate")
+
+// ------------------ Guess the numb ------------------ //
+const superSecretNumber = Math.floor(Math.random() * 100);
+document.getElementById("number-guess-button").addEventListener('click', guessMe);
+
+function guessMe() {
+    event.preventDefault();
+    const numberInput = document.getElementById("guess-number-input").value;
+    var guessDisplayText = "In this case I say nothing";
+    if (numberInput == superSecretNumber){
+        guessDisplayText = "Yahaha, you found me !!!"
+    }
+    if (numberInput > superSecretNumber){
+        guessDisplayText = "Oh no, big boy being too big";
+    }
+    if (numberInput < superSecretNumber){
+        guessDisplayText = "You smaller number";
+    }
+    document.getElementById("guessDisplay").innerText = guessDisplayText;
+}
+
+
+// ------------------ Bouncing Brick ------------------ //
+
+// TODO Shitty code, need to be changed, I've used the wrong approach.
+// Need to put things in proper functions / lambdas
+// Need to stop chasing the wrong way
+// It's still a good project to learn things! 
+const canvas = document.getElementById("first-canvas")
+const ctx = document.getElementById("first-canvas").getContext("2d");
+const balgGuyimg = new Image();
+balgGuyimg.src = '../images/goofy-bald.webp'; // Chemin de l'image
+
+var baldGuyX = 0;
+var baldGuyY = 0;
+balgGuyimg.onload = () => {
+    ctx.drawImage(balgGuyimg, baldGuyX, baldGuyY);
+};
+
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect(); // Position du canvas dans la page
+    const x = Math.floor(e.clientX - rect.left); // Coordonnée x de la souris dans le canvas
+    const y = Math.floor(e.clientY - rect.top);  // Coordonnée y de la souris dans le canvas
+    console.log(`valeur de x: ${x}`);
+    console.log(`valeur de y: ${y}`);
+
+    const t = 0.001; // le step en gros la vitesse à la quel on glisse sur le vecteur
+    var values = calculateNewCoordinates(baldGuyX, baldGuyY, x, y, t);
+    var newX = values[0];
+    var newY = values[1];
+    console.log(values);
+    console.log(`newX: ${newX}`);
+    console.log(`newY: ${newY}`);
+
+    animerBaldGuy(newX, newY);
+});
+
+function calculateNewCoordinates(x1, y1, x2, y2, t){
+    console.log(`x1: ${x1}`);
+    console.log(`y1: ${y1}`);
+    console.log(`x2: ${x2}`);
+    console.log(`y2: ${y2}`);
+    const newX = Math.floor(x1) + Math.floor(t * (Math.floor(x2) - Math.floor(x1)));
+    const newY = Math.floor(y1) + Math.floor(t * (Math.floor(y2) - Math.floor(y1)));
+    const tab = [newX, newY];
+    return tab;
+}
+
+function animerBaldGuy(newX, newY) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Nettoie le canvas
+
+    baldGuyX = newX;
+    baldGuyY = newY;
+    console.log(`BaldGuyY : ${baldGuyX}`);
+    console.log(`BaldGuyY : ${baldGuyY}`);
+
+    ctx.beginPath();
+    ctx.drawImage(balgGuyimg, baldGuyX, baldGuyY);
+    ctx.closePath();
+
+    requestAnimationFrame(animerBaldGuy); // Continue l'animation
 }

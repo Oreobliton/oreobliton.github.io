@@ -109,3 +109,24 @@
         transform: rotateX(0deg) scaleY(1);
     }
 }
+
+/* ------- Guess Number ------- */
+.number-guess-container {
+    display: flex; /* Utilisation de flexbox pour aligner correctement les éléments */
+    align-items: center; /* Aligne les éléments au centre */
+    justify-content: center; /* Centre les éléments horizontalement et verticalement */
+    width: 33%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* S'assure que le padding/margin n'affecte pas la taille de la div */
+    background-color:rgb(7, 174, 118);
+}
+
+.number-guess-container h2 {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* ------- First Canvas ------- */
+#first-canvas {
+    background-color: bisque;
+}
