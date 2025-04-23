@@ -60,6 +60,16 @@ nav a {
     margin-left: 1em;
 }
 
+.rules-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px; /* Space between text and gif */
+  }
+  
+.rules-text {
+    max-width: 300px; /* Optional: limit text width */
+  }
+
 #todo {
     grid-area: todo;
     background-color: lightgreen;
@@ -111,4 +121,24 @@ nav a {
     background-color: #ffffff;
     border: 2px solid #ddd;
     border-radius: 8px;
+}
+
+.about-title{
+    background-color: whitesmoke;
+    font-weight:bolder;
+    animation: coloring 2s infinite;
+
+}
+
+
+@keyframes coloring {
+0% {
+    color: rgb(0, 255, 0);
+}
+50% {
+    color: rgb(0, 0, 125);
+}
+100% {
+    color: rgb(250, 0, 0);
+}
 }
