@@ -1,0 +1,57 @@
+carla!: trop stylé le truc de message qui se détruit!!
+Paolo: cimer 
+Paolo: je le fais soon
+LéaSmalalé: on peut envoyer de la couleur dans les messages ? 
+LéaSmalalé: ou c'est que le serveur quand il affiche les pseudos ? 
+Paolo: c'est le front
+Paolo: on peut pas mettre de couleur dans le message
+LéaSmalalé: o k
+EnviedemeBot: J'émet le besoin impérieux de me k la o
+Paolo: ça personne ne l'a fait mais c'est 100% possible de faire un front alternatif
+LéaSmalalé: Ce serait genre faisable comment ? c:
+Paolo: tu peux complètement t'inspirer du JS
+Paolo: en gros y'a uyn endpoint à appeler pr obtenir l'adresse du websocket
+Paolo: une fois connecté au WS tu reçois des JSON avec 3 champs: pseudo, message, affichage
+Paolo: et y'a un 2e endpoint pour publier un message, tu dois lui envoyer pareil: pseudo, message, affichage
+Paolo: c'est tout
+LéaSmalalé: carré
+LéaSmalalé: je dis pas que je vais le faire
+LéaSmalalé: mais je note ça
+Paolo: note bien ça
+Paolo: j'ai pas minifié le JS ou qu'est-ce
+LéaSmalalé: merci pour ça
+Paolo: c'est complètement possible de le copier allègrement
+Paolo: tout est ouvert tu peux XSS on cd
+Paolo: y'a meme des topics dans la backend
+Paolo: genre la on poste tous dans général
+Paolo: mais on pourrait poster ailleurs :eyes:
+LéaSmalalé: Comment ?!
+LéaSmalalé: C'est juste une question de front encore ? 
+Paolo: jsp faudrait que qqun dev un front parce que j'ai pas mis la feature dans le mien
+Paolo: ouais
+LéaSmalalé: peut être que quelqu'un essayera de le faire
+Paolo: :eyes:
+:                             
+                              
+    ████████      ███████     
+   ██      ███  ███      ██   
+  ██         ████         ██  
+ ██  ██       ██   █       █  
+ ██ ███       ██ ███       ██ 
+ █ ██████     ██ █████     ██ 
+ ██ █████     ██ █████     ██ 
+ ██  ███     ████ ███      █  
+  ██         █  █         ██  
+   ██      ██   ███     ███   
+     ███████      ███████     
+LéaSmalalé: on sait pas hein
+LéaSmalalé: personne peut savoir
+LéaSmalalé: pas vrai ?
+Paolo: {"username":"Paolo","topic":"general","message":":eyes:","display":"raw"}
+Paolo: haha pas vrai l'équipe
+LéaSmalalé: ok j'ai une vision mais je commence pas maintenant
+Paolo: ce serait qd mm pas aussi simple que de poster un json avec autre chose que général qd mm
+Paolo: qd tu veux
+LéaSmalalé: je finis de coudre avant
+Paolo: reste énorme
+EnviedemeBot: Je meurs d'envie de me énorme la reste

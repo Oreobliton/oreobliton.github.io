@@ -1,0 +1,132 @@
+.quote-container {
+    display: flex; /* Utilisation de flexbox pour aligner correctement les éléments */
+    flex-direction: column; /* Les éléments à l'intérieur s'empilent verticalement */
+    align-items: center; /* Aligne les éléments au centre */
+    justify-content: center; /* Centre les éléments horizontalement et verticalement */
+    width: 100%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* S'assure que le padding/margin n'affecte pas la taille de la div */
+    background-color: antiquewhite;
+}
+
+.quote-button {
+    margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
+    padding: 10px 20px; /* Définie la taille du bouton */
+    font-size: 16px; /* Taille de police du texte du bouton */
+    cursor: pointer; /* Change le curseur en main pour indiquer que c'est un bouton cliquable */
+}
+
+.quote {
+    font-family: 'Arial', sans-serif;   /* Change la police du texte */
+    font-size: 40px;                    /* Définit la taille du texte */
+    color: #333333;                     /* Change la couleur du texte */
+    text-align: center;                 /* Centre le texte */
+    line-height: 1.5;                   /* Définit l'espacement entre les lignes */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Ajoute une ombre au texte */
+}
+
+.letter {
+    display: inline-block;
+    animation: shake .05s infinite;
+}
+
+@keyframes shake {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(var(--shake-x), var(--shake-y));
+    }
+}
+
+
+
+.colored-text-container {
+    display: flex; /* Utilisation de flexbox pour aligner correctement les éléments */
+    flex-direction: column; /* Les éléments à l'intérieur s'empilent verticalement */
+    align-items: center; /* Aligne les éléments au centre */
+    justify-content: center; /* Centre les éléments horizontalement et verticalement */
+    width: 100%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* S'assure que le padding/margin n'affecte pas la taille de la div */
+    background-color:aquamarine;
+}
+
+
+.shine {
+    background-color: whitesmoke;
+    display: inline-block;
+    font-weight:bolder;
+    animation: coloring 2s infinite;
+}
+
+
+@keyframes coloring {
+    0% {
+        color: rgb(var(--r), var(--g), var(--b));
+    }
+    50% {
+        color: rgb(0, var(--g), 125);
+    }
+    100% {
+        color: rgb(var(--r), var(--g), var(--b));
+    }
+}
+
+
+
+.turning-image-container {
+    perspective: 1500px; 
+    background-color:blueviolet;
+    align-items: center;
+    box-sizing: border-box; /* S'assure que le padding/margin n'affecte pas la taille de la div */
+    flex-direction: column; /* Les éléments à l'intérieur s'empilent verticalement */
+    align-items: center;
+    display: flex;
+}
+
+.turning-image {
+    width: 300px; /* Adjust to your image size */
+    transform-origin: center;
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d; /* Enables 3D transformations */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: #333333 33px;
+}
+
+.turning-image.animate {
+    animation: turn 4s infinite;
+}
+
+@keyframes turn {
+    0% {
+        transform: rotateX(0deg) scaleY(1);
+    }
+    50% {
+        transform: rotateX(180deg) scaleY(1);
+    }
+    100% {
+        transform: rotateX(0deg) scaleY(1);
+    }
+}
+
+/* ------- Guess Number ------- */
+.number-guess-container {
+    display: flex; /* Utilisation de flexbox pour aligner correctement les éléments */
+    align-items: center; /* Aligne les éléments au centre */
+    justify-content: center; /* Centre les éléments horizontalement et verticalement */
+    width: 33%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* S'assure que le padding/margin n'affecte pas la taille de la div */
+    background-color:rgb(7, 174, 118);
+}
+
+.number-guess-container h2 {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* ------- First Canvas ------- */
+#first-canvas {
+    background-color: bisque;
+}
