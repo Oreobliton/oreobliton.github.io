@@ -1,0 +1,107 @@
+[33mcommit b17c2c11adcbc67f44ad75014cba561217ec12ac[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Thu May 15 20:44:26 2025 +0200
+
+    added valid nav links
+
+[33mcommit 231fa81765e37a935d7f0d57de01c1a22c5344be[m
+Author: Oreobliton <41651631+Oreobliton@users.noreply.github.com>
+Date:   Thu May 15 19:33:49 2025 +0200
+
+    added missing imags
+
+[33mcommit 20a1db7749018a6677ef07e13625d11597dadf02[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Thu May 15 18:42:35 2025 +0200
+
+    changing images path
+
+[33mcommit d0816817baf9822305880c89387078c77f92f011[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Thu May 15 18:39:38 2025 +0200
+
+    changing images path
+
+[33mcommit 8b50431775f5144a1042c6fb2435f29ea54713c6[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Thu May 15 18:34:19 2025 +0200
+
+    restructured for github pages
+
+[33mcommit 636bef25d77a4a297abe1f08845fab3856607097[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Thu May 15 12:30:45 2025 +0200
+
+    added content and custom front to petitchat
+
+[33mcommit 256edfb9162f9754775cada4239827990859df96[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Wed Apr 23 17:32:53 2025 +0200
+
+    added marquees and GIF
+
+[33mcommit fc450a6bd03c9c37d56721b2d0d011f92bbf82fe[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Wed Apr 23 12:34:01 2025 +0200
+
+    added content and changed some css
+
+[33mcommit 92c5b8dca42f151968c4e2c189aab5d276487664[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Thu Jan 2 16:15:33 2025 +0100
+
+    feat: added content in the lab
+
+[33mcommit 93a0a0c9c76e7f2fcccd1c3a1b9de4cc9ffeb088[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Mon Nov 11 18:03:18 2024 +0100
+
+    gitignore
+
+[33mcommit e859f4345930b4c9f22d6a44d6fa7dd8ad4ceb97[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Mon Nov 11 18:01:50 2024 +0100
+
+    added other experimentations
+
+[33mcommit c273eeae1644d7012e8c1b26187190acaf849cfd[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Fri Nov 8 19:35:51 2024 +0100
+
+    first js experimentation
+
+[33mcommit 20ebedfefec0b1318e60a9b23a77bc74259e77bd[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Fri Nov 8 19:28:27 2024 +0100
+
+    working on the lab
+
+[33mcommit 3f302776d690d4e366047876c9f7c6540eff6dec[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Tue Oct 29 11:08:09 2024 +0100
+
+    finished with shitty content
+
+[33mcommit fb830bdf9d72d420ae8a3105490d0af34f5db101[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Tue Oct 29 01:46:16 2024 +0100
+
+    added more shitty content
+
+[33mcommit e1f8da86cd3cd02d6467b7ca68608d935c786c35[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Tue Oct 29 00:29:22 2024 +0100
+
+    starting to add content
+
+[33mcommit 17b577b65e6f1713d4679c5912fdd47e105a04b8[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Mon Oct 28 17:09:57 2024 +0100
+
+    added basic layout
+
+[33mcommit 4b36d8e651c7d3af4e286c11c3dfa29256c2fcb8[m
+Author: tpicard <tristan@ziosting.com>
+Date:   Mon Oct 28 08:27:12 2024 +0100
+
+    init

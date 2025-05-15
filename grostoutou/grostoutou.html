@@ -33,10 +33,10 @@
         </div>
 
         <div class="hidden" id="buttons-div">
-            <button class="sideButton" id="obelixButton" title="Obelimsme">Obelimsme</button>
-            <button class="sideButton" id="carButton" title="Ouature">Ouature</button>
-            <button class="sideButton" id="catButton" title="Gatto">Gatto</button>
-            <button class="sideButton" id="boneButton" title="Skeleton">Skeleton</button>
+            <button class="sideButton" id="obelixButton" value="obelix">Obelimsme</button>
+            <button class="sideButton" id="carButton" value="car">Ouature</button>
+            <button class="sideButton" id="catButton" value="cat">Gatto</button>
+            <button class="sideButton" id="boneButton" value="skeleton">Skeleton</button>
         </div>
         
         <div class="hidden" id="chat">
@@ -94,6 +94,8 @@
                 )
                 const jsonResponse = await response.json();
                 const ws = new WebSocket(jsonResponse.url);
+                send_message(username + " vient d'entrer dans le chat !!!!", "marquee")
+
                 ws.onmessage = (event) => {
 
                     var messageData = JSON.parse(event.data)
@@ -112,7 +114,7 @@
                     }
                     if (messageData.display == "raw") {
                         messageSpan = document.createElement("span")
-                        messageSpan.innerText = `${messageData.message}`
+                        messageSpan.innerHTML = parse_special_messages(messageData.message)
                     }
                     if (messageData.display == "3d") {
                         messageSpan = document.createElement("div")
@@ -147,8 +149,23 @@
                     }
                 }
             }
+            function parse_special_messages(message) {
+                // Dubious practice, security engineers will cry
+                let safe_message = message.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/&/g, "&amp;")
+                    .replace(/'/g, "&#039;");
+                
+                // Gras : **texte**
+                safe_message = safe_message.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+                // Italique : *texte*
+                safe_message = safe_message.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
+                return safe_message;
+                }
             
-            async function send_3D_message(msg) {
+            async function send_message(msg, display) {
                 const response = fetch(
                         `${baseUrl}/ws/publish`,
                         {
@@ -157,7 +174,7 @@
                                 username: username,
                                 topic: topic,
                                 message: msg,
-                                display: "3d"
+                                display: display,
                             }),
                             headers: {
                                 "Content-Type": "application/json",
@@ -166,19 +183,16 @@
                     )                
             }
 
-            document.getElementById("obelixButton").addEventListener("click", function () {
-                send_3D_message("obelix")
+            // Sélectionne tous les boutons avec la classe "sideBouton"
+            const buttons = document.querySelectorAll('.sideButton');
+
+            // Pour chacun, ajoute un listener
+            buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                send_message(button.value, "3d"); // Appelle la fonction avec la valeur
+                });
             });
-            document.getElementById("boneButton").addEventListener("click", function () {
-                send_3D_message("skeleton")
-            });
-            document.getElementById("carButton").addEventListener("click", function () {
-                send_3D_message("car")
-            });
-            document.getElementById("catButton").addEventListener("click", function () {
-                send_3D_message("cat")
-            });
-            
+
             document.addEventListener("visibilitychange", function () {
                 if (document.visibilityState === "visible") {
                     document.getElementById("title").innerText = "🐕🤌 Gros Toutou"
@@ -262,7 +276,7 @@
                 }
 
                 loader.load(
-                    `/public/models/${modelName}.glb`,
+                    `./public/models/${modelName}.glb`,
                     function ( gltf ) {
                         model = gltf.scene
                         if (scaleMap.hasOwnProperty(modelName)) {
