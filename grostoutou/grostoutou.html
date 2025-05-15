@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body style="height: 100%">
+        <div id="image-container"></div>
         <div id="loginContainer">
             <h2>Bienvenue sur Gros Toutou 🐶</h2>
             <div class="formGroup">
@@ -62,7 +63,6 @@
             import * as CHART from 'chart';
 
             const baseUrl = "https://chat.paolo.frenchnerds.cafe"
-            // const baseUrl = "http://localhost:3333/front"
 
             let chatbox = document.getElementById("chat")
             let display = document.getElementById("display")
@@ -172,7 +172,10 @@
                     .replace(/"/g, "&quot;")
                     .replace(/&/g, "&amp;")
                     .replace(/'/g, "&#039;");
-                
+
+                if (safe_message.toLowerCase().includes("bella")){
+                    bella();
+                }
                 // Gras : **texte**
                 safe_message = safe_message.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
                 // Italique : *texte*
@@ -206,6 +209,7 @@
                 }
                 updateChart();
             }
+            
             function getColor(value, max) {
                 const red = Math.round((value / max) * 255);
                 const green = 255 - red;
@@ -370,6 +374,25 @@
                 renderer.setSize( window.innerWidth/5, window.innerHeight/5 );
                 return renderer.domElement
             }
+
+        function bella(){
+            const music = new Audio('./public/sounds/BELLA.mp3');
+            music.play().catch(e => {
+                console.error("Erreur lors de la lecture de la musique :", e);
+                });
+            const container = document.getElementById('image-container');
+            const img = document.createElement('img');
+            img.src = './public/sounds/gims.jpg';  // <-- Mets ici ton chemin d’image
+            img.classList.add('rotating-image');
+            
+            container.appendChild(img);
+
+            // Supprime l’image après 2s
+            setTimeout(() => {
+                container.removeChild(img);
+            }, 3000);
+            }
+
         </script>
     </body>
 </html>
