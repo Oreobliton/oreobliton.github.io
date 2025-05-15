@@ -7,7 +7,8 @@
             {
               "imports": {
                 "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
-                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/",
+                "chart": "https://cdn.jsdelivr.net/npm/chart.js"
               }
             }
         </script>
@@ -49,10 +50,16 @@
                 </div>
             </div>
         </div>
+        <div id="letter-chart-container" class="hidden" style="position: absolute; right: 0; top: 50px;  background: #fff; border-left: 1px solid #ccc; padding: 10px; z-index: 100;">
+            <canvas id="letterChart" width="450" height="180"></canvas>
+        </div>
+        
+        
 
         <script type="module">
             import * as THREE from 'three';
             import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+            import * as CHART from 'chart';
 
             const baseUrl = "https://chat.paolo.frenchnerds.cafe"
             // const baseUrl = "http://localhost:3333/front"
@@ -68,6 +75,10 @@
             let username
             let topic
             let ws
+
+            const letterFreq = {};
+            let chart; // Référence au graphique*
+
             async function setUsername(){
                 username = usernameInput.value
                 topic = topicInput.value
@@ -77,6 +88,7 @@
                 
                 //Unhiding things
                 chatbox.classList.remove('hidden')
+                document.getElementById("letter-chart-container").classList.remove("hidden")
                 document.getElementById("buttons-div").classList.remove("hidden")
 
 
@@ -94,7 +106,9 @@
                 )
                 const jsonResponse = await response.json();
                 const ws = new WebSocket(jsonResponse.url);
-                send_message(username + " vient d'entrer dans le chat !!!!", "marquee")
+                let new_arrival = "" + username + " vient d'entrer dans le chat !!!!";
+                console.log(new_arrival)
+                send_message(new_arrival, "marquee");
 
                 ws.onmessage = (event) => {
 
@@ -114,6 +128,7 @@
                     }
                     if (messageData.display == "raw") {
                         messageSpan = document.createElement("span")
+                        updateLetterFrequency(messageData.message);
                         messageSpan.innerHTML = parse_special_messages(messageData.message)
                     }
                     if (messageData.display == "3d") {
@@ -181,6 +196,53 @@
                             },
                         },
                     )                
+            }
+
+            function updateLetterFrequency(newText) {
+                for (let char of newText.toLowerCase()) {
+                    if (char >= 'a' && char <= 'z') {
+                        letterFreq[char] = (letterFreq[char] || 0) + 1;
+                    }
+                }
+                updateChart();
+            }
+            function getColor(value, max) {
+                const red = Math.round((value / max) * 255);
+                const green = 255 - red;
+                return `rgba(${red}, ${green}, 100, 0.7)`; // du vert clair au rouge
+            }
+
+            function updateChart() {
+                const letters = Object.keys(letterFreq).sort();
+                const counts = letters.map(l => letterFreq[l]);
+                const max = Math.max(...counts);
+
+                const colors = counts.map(value => getColor(value, max));
+
+                if (!chart) {
+                    const ctx = document.getElementById('letterChart').getContext('2d');
+                    chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: letters,
+                            datasets: [{
+                                label: 'Occurrences',
+                                data: counts,
+                                backgroundColor: colors
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: { beginAtZero: true }
+                            }
+                        }
+                    });
+                } else {
+                    chart.data.labels = letters;
+                    chart.data.datasets[0].data = counts;
+                    chart.data.datasets[0].backgroundColor = colors;
+                    chart.update();
+                }
             }
 
             // Sélectionne tous les boutons avec la classe "sideBouton"
