@@ -2,6 +2,10 @@
 .hidden {
     display: none !important;
 }
+
+body {
+    background-image: url(./public/models/chieng.jpg);
+}
 #chat {
     display: flex;
     flex-direction: column;
