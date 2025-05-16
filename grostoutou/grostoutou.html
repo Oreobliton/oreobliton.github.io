@@ -128,7 +128,11 @@
                     }
                     if (messageData.display == "raw") {
                         messageSpan = document.createElement("span")
-                        updateLetterFrequency(messageData.message);
+                        updateLetterFrequency(messageData.message)
+                        if (contains_mention(messageData.message)){
+                            messageData.message = process_mention(messageData.message)
+                            messageSpan.style = "white-space: pre-wrap; background-color: rgba(255, 156, 145, 0.767);"
+                        }
                         messageSpan.innerHTML = parse_special_messages(messageData.message)
                     }
                     if (messageData.display == "3d") {
@@ -164,6 +168,16 @@
                     }
                 }
             }
+
+            function contains_mention(message) {
+                return message.includes("@"+username)
+            }
+
+            function process_mention(message) {
+                return message.replace("@" + username, "**@"+username+"**")
+            }
+
+
             function parse_special_messages(message) {
                 // Dubious practice, security engineers will cry
                 let safe_message = message.replace(/&/g, "&amp;")
