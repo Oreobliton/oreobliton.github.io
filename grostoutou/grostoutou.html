@@ -54,6 +54,16 @@
         <div id="letter-chart-container" class="hidden" style="position: absolute; right: 0; top: 50px;  background: #fff; border-left: 1px solid #ccc; padding: 10px; z-index: 100;">
             <canvas id="letterChart" width="450" height="180"></canvas>
         </div>
+
+        <div id="gauge" class="hidden">
+            <svg viewBox="0 0 200 100" width="200">
+              <path d="M10,100 A90,90 0 0,1 190,100" fill="none" stroke="#ccc" stroke-width="10"/>
+              <line id="needle" x1="100" y1="100" x2="100" y2="20" stroke="red" stroke-width="4" transform="rotate(0 100 100)" />
+            </svg>
+            <p style="color: white;">Horrible feature, ne fonctionne pas</p>
+            <p id="wpm-display"></p>
+
+          </div>
         
         
 
@@ -76,8 +86,17 @@
             let topic
             let ws
 
+            // occurence de lettres
             const letterFreq = {};
-            let chart; // Référence au graphique*
+            let chart; 
+
+            // Word par minutes gauge
+            let startTime = null;
+            let wordCount = 0;
+            let interval = null;
+            const needle = document.getElementById('needle');
+            const wpmDisplay = document.getElementById('wpm-display');
+
 
             async function setUsername(){
                 username = usernameInput.value
@@ -90,6 +109,7 @@
                 chatbox.classList.remove('hidden')
                 document.getElementById("letter-chart-container").classList.remove("hidden")
                 document.getElementById("buttons-div").classList.remove("hidden")
+                document.getElementById("gauge").classList.remove("hidden")
 
 
                 input.focus()
@@ -262,6 +282,39 @@
                     chart.update();
                 }
             }
+            
+            // Word per minute gauge
+            let snapshots = []; // [{ time: timestamp, count: wordCount }]
+            const WPM_WINDOW = 20000; // 20 secondes en ms       
+            function updateWPM() {
+                const now = Date.now();
+                
+                // Ajouter snapshot actuel
+                snapshots.push({ time: now, count: wordCount });
+
+                // Supprimer ceux qui ont plus de 20s
+                snapshots = snapshots.filter(snap => now - snap.time <= WPM_WINDOW);
+
+                if (snapshots.length < 2) return;
+
+                // Comparer avec le plus ancien snapshot encore dans la fenêtre
+                const oldest = snapshots[0];
+                const wordDiff = wordCount - oldest.count;
+                const timeDiff = (now - oldest.time) / 60000; // en minutes
+
+                const wpm = timeDiff > 0 ? Math.round(wordDiff / timeDiff) : 0;
+                updateGauge(wpm);
+            }
+
+            function updateGauge(wpm) {
+                const wpmClamped = Math.max(0, wpm);
+                const maxWPM = 30; // atteindre le max à 30 mots/min (ajuste à ton goût)
+                const ratio = Math.min(1, wpmClamped / maxWPM);
+                const angle = ratio * 180 - 90;
+                wpmDisplay.textContent = `WPM: ${wpmClamped}`;
+                needle.setAttribute('transform', `rotate(${angle} 100 100)`);
+            }
+
 
             // Sélectionne tous les boutons avec la classe "sideBouton"
             const buttons = document.querySelectorAll('.sideButton');
@@ -294,6 +347,7 @@
                     return
                 }
                 if (e.key === "Enter") {
+                    let sending_message = input.value
                     e.preventDefault()
                     const response = fetch(
                         `${baseUrl}/ws/publish`,
@@ -302,7 +356,7 @@
                             body: JSON.stringify({
                                 username: username,
                                 topic: topic,
-                                message: input.value,
+                                message: sending_message,
                                 display: "raw"
                             }),
                             headers: {
@@ -314,6 +368,13 @@
                     input.selectionStart = 0
                     input.selectionEnd = 0
                     input.focus()
+                    
+                    // Word par minute updater
+                    wordCount = sending_message === "" ? 0 : sending_message.split(/\s+/).length;
+                    if (!startTime) {
+                        startTime = Date.now();
+                        interval = setInterval(updateWPM, 1000); // Mise à jour toutes les secondes
+                    }
                 }
             })
 
@@ -401,7 +462,7 @@
             
             container.appendChild(img);
 
-            // Supprime l’image après 2s
+            // Supprime l’image après 3s
             setTimeout(() => {
                 container.removeChild(img);
             }, 3000);

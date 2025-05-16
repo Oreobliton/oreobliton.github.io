@@ -6,6 +6,23 @@
 body {
     background-image: url(./public/models/chieng.jpg);
 }
+
+#wpm-display {
+    text-align: center;
+    color: #f9f9f9;
+}
+#needle {
+    transition: transform 0.5s ease-in-out;
+  }
+  
+#gauge {
+    height: 150px;
+    width: 350px;
+    background-image: url(./public/models/fire.jpg);
+    display: flex;
+    padding-bottom: 30%;
+}
+
 #chat {
     display: flex;
     flex-direction: column;
