@@ -128,7 +128,7 @@
                 const ws = new WebSocket(jsonResponse.url);
                 let new_arrival = "" + username + " vient d'entrer dans le chat !!!!";
                 console.log(new_arrival)
-                send_message(new_arrival, "marquee");
+                send_message(new_arrival, "marquee", "ADMIN");
 
                 ws.onmessage = (event) => {
 
@@ -217,13 +217,13 @@
                 return safe_message;
                 }
             
-            async function send_message(msg, display) {
+            async function send_message(msg, display, author=username) {
                 const response = fetch(
                         `${baseUrl}/ws/publish`,
                         {
                             method: "POST",
                             body: JSON.stringify({
-                                username: username,
+                                username: author,
                                 topic: topic,
                                 message: msg,
                                 display: display,
@@ -314,70 +314,6 @@
                 wpmDisplay.textContent = `WPM: ${wpmClamped}`;
                 needle.setAttribute('transform', `rotate(${angle} 100 100)`);
             }
-
-
-            // Sélectionne tous les boutons avec la classe "sideBouton"
-            const buttons = document.querySelectorAll('.sideButton');
-
-            // Pour chacun, ajoute un listener
-            buttons.forEach(button => {
-            button.addEventListener('click', function () {
-                send_message(button.value, "3d"); // Appelle la fonction avec la valeur
-                });
-            });
-
-            document.addEventListener("visibilitychange", function () {
-                if (document.visibilityState === "visible") {
-                    document.getElementById("title").innerText = "🐕🤌 Gros Toutou"
-                }
-            });
-
-            usernameInput.addEventListener('keyup', function onEvent(e) {
-                if (e.key === "Enter") {
-                    setUsername()
-                }
-            })
-
-            usernameSubmit.addEventListener('click', function onEvent(e) {
-                setUsername()
-            })
-
-            input.addEventListener('keydown', function onEvent(e) {
-                if (e.shiftKey){
-                    return
-                }
-                if (e.key === "Enter") {
-                    let sending_message = input.value
-                    e.preventDefault()
-                    const response = fetch(
-                        `${baseUrl}/ws/publish`,
-                        {
-                            method: "POST",
-                            body: JSON.stringify({
-                                username: username,
-                                topic: topic,
-                                message: sending_message,
-                                display: "raw"
-                            }),
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        },
-                    )
-                    input.value = ""
-                    input.selectionStart = 0
-                    input.selectionEnd = 0
-                    input.focus()
-                    
-                    // Word par minute updater
-                    wordCount = sending_message === "" ? 0 : sending_message.split(/\s+/).length;
-                    if (!startTime) {
-                        startTime = Date.now();
-                        interval = setInterval(updateWPM, 1000); // Mise à jour toutes les secondes
-                    }
-                }
-            })
-
             function stringToColor(str) {
                 let hash = 0;
                 str.split('').forEach(char => {
@@ -450,24 +386,76 @@
                 return renderer.domElement
             }
 
-        function bella(){
-            const music = new Audio('./public/sounds/BELLA.mp3');
-            music.play().catch(e => {
-                console.error("Erreur lors de la lecture de la musique :", e);
+            function bella(){
+                const music = new Audio('./public/sounds/BELLA.mp3');
+                music.play().catch(e => {
+                    console.error("Erreur lors de la lecture de la musique :", e);
+                    });
+                const container = document.getElementById('image-container');
+                const img = document.createElement('img');
+                img.src = './public/sounds/gims.jpg';
+                img.classList.add('rotating-image');
+                
+                container.appendChild(img);
+
+                // Supprime l’image après 3s
+                setTimeout(() => {
+                    container.removeChild(img);
+                }, 3000);
+                }
+
+            // Sélectionne tous les boutons avec la classe "sideBouton"
+            const buttons = document.querySelectorAll('.sideButton');
+
+            // Pour chacun, ajoute un listener
+            buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                send_message(button.value, "3d"); // Appelle la fonction avec la valeur
                 });
-            const container = document.getElementById('image-container');
-            const img = document.createElement('img');
-            img.src = './public/sounds/gims.jpg';
-            img.classList.add('rotating-image');
-            
-            container.appendChild(img);
+            });
 
-            // Supprime l’image après 3s
-            setTimeout(() => {
-                container.removeChild(img);
-            }, 3000);
-            }
+            document.addEventListener("visibilitychange", function () {
+                if (document.visibilityState === "visible") {
+                    document.getElementById("title").innerText = "🐕🤌 Gros Toutou"
+                }
+            });
 
+            usernameInput.addEventListener('keyup', function onEvent(e) {
+                if (e.key === "Enter") {
+                    setUsername()
+                }
+            })
+
+            usernameSubmit.addEventListener('click', function onEvent(e) {
+                setUsername()
+            })
+
+            window.addEventListener("beforeunload", (event) => {
+                let message = username + " vient de nous quitter :/"
+                send_message(message, "marquee", "ADMIN")
+            })
+
+            input.addEventListener('keydown', function onEvent(e) {
+                if (e.shiftKey){
+                    return
+                }
+                if (e.key === "Enter") {
+                    let sending_message = input.value
+                    e.preventDefault()
+                    send_message(sending_message, "raw")
+                    input.value = ""
+                    input.selectionStart = 0
+                    input.selectionEnd = 0
+                    input.focus()
+                    
+                    // Word par minute updater
+                    wordCount = sending_message === "" ? 0 : sending_message.split(/\s+/).length;
+                    if (!startTime) {
+                        startTime = Date.now();
+                        interval = setInterval(updateWPM, 1000); // Mise à jour toutes les secondes
+                    }
+                }
+            })
         </script>
     </body>
 </html>
