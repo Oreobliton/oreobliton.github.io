@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Little Gallery</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-image: url("./images/gallery-back.jpg");
+    }
+    
+    .gallery-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      height: auto;
+      max-width: 1000px;
+      max-height: 800px;
+      margin: auto;
+
+      background-color: bisque;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 20px
+    }
+    
+    .gallery img {
+        height: 200px;      /* hauteur uniforme */
+        object-fit: cover;  /* remplissage sans déformation */
+        width: 100%;        /* largeur adaptative */
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      font-size: 2rem;
+      color: white;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    #prevBtn { left: 10px; }
+    #nextBtn { right: 10px; }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    .page-layout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .side-text {
+      display: flex;
+      text-align: center;
+      border-color: red;
+      border-style:double;
+      border-width: 10px;
+      width: 300px;
+      color: #1e1e1e;
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      background: bisque;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body style="background-color: darkseagreen;">
+  <h1 style="text-align: center; font-size: 300%; background-color:blanchedalmond; font-kerning: auto;";> 𝓛𝓲𝓽𝓽𝓵𝓮 𝓰𝓪𝓵𝓵𝓮𝓻𝔂 </h1>
+  <div class="page-layout">
+    <div class="side-text">
+      <p style="font-style: italic; font-family:'Lucida Sans';">This is my little <span style="color:blue; font-weight: bold;">gallery</span>. <br>You can <span style="text-decoration: underline; font-weight: bolder;">click</span> on the <span style="color:green;font-style: normal; font-weight: lighter;">pictures</span> to get a better view. <br>I will only upload by batch of 12 <span style="color:green;font-style: normal; font-weight: lighter;">pics</span> so stay tuned to see the next one !!!</p>
+    </div>
+  
+    <div class="gallery-container">
+      <div class="gallery" id="gallery"></div>
+    </div>
+  
+    <div class="side-text">
+      <p></p>
+      <p style="font-style: italic; font-family:'Lucida Sans';">When I'll update the <span style="color:blue;font-weight: bold;">gallery</span> the current "collection" will rotate out so save the <span style="color:green;font-style: normal; font-weight: lighter;">pictures</span> that you like now !!! </p>
+    </div>
+  </div>
+
+
+  <div class="lightbox" id="lightbox">
+    <button id="prevBtn" class="nav-btn">◀</button>
+    <img id="lightbox-img" src="" alt="">
+    <button id="nextBtn" class="nav-btn">▶</button>
+  </div>
+
+  <script>
+    const images = [
+      'images/pics/1.JPG',
+      'images/pics/2.JPG',
+      'images/pics/3.JPG',
+      'images/pics/5.JPG',
+      'images/pics/6.JPG',
+      'images/pics/7.JPG',
+      'images/pics/8.JPG',
+      'images/pics/9.JPG',
+      'images/pics/10.JPG',
+      'images/pics/11.JPG',
+      'images/pics/12.JPG',
+      'images/pics/13.JPG',
+    ];
+
+    let currentIndex = 0;
+
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  // Génère les images
+  images.forEach((src, index) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      showImage();
+    });
+    gallery.appendChild(img);
+  });
+
+  // Affiche l'image courante dans le lightbox
+  function showImage() {
+    lightboxImg.src = images[currentIndex];
+    lightbox.classList.add('visible');
+  }
+
+  // Ferme le lightbox au clic sur le fond
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightboxImg) {
+      lightbox.classList.remove('visible');
+      lightboxImg.src = '';
+    }
+  });
+
+  // Navigation boutons
+  prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // empêche la fermeture du lightbox
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage();
+  });
+
+  nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage();
+  });
+  </script>
+
+</body>
+</html>
