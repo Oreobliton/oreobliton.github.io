@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Pasta';
+  src: url('./fonts/lovin-kites-font/lovkites.ttf') format('opentype');
+  font-weight: bolder;
+  font-style: normal;
+  font-size: larger;
+}
+
+@font-face {
+  font-family: 'Comic';
+  src: url('./fonts/ldfcomicsans-font/Ldfcomicsans-jj7l.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
     background-image: url('images/main-background.jpg'); /* Path to your background image */
     background-size: cover;         /* Ensures the image covers the entire viewport */
